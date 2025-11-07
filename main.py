@@ -1,12 +1,17 @@
 # -*- coding: utf-8 -*-
 # 在此文件处编辑代码
 def analyze_text(text):
-    char_count = Counter(text)
-    sorted_chars = sorted(char_count.items(), key=lambda x: (-x[1], x[0]))
-    print("")
-    for char, count in sorted_chars:
-        if char.isalpha():
-            print(f"字符 '{char}'：出现 {count} 次")
+    char_freq = {}
+    for char in text:
+        if char in char_freq:
+            char_freq[char] += 1
+        else:
+            char_freq[char] = 1
+    sorted_items = sorted(
+        char_freq.items(),
+        key=lambda x: (-x[1](aiwd1), ord(x[2](aiwd0)))
+    
+    return sorted_items
 # 主程序，已完整
 if __name__ == "__main__":
     print("文本字符频率分析器")
