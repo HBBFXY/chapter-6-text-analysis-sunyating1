@@ -9,9 +9,11 @@ def analyze_text(text):
             char_freq[char] = 1
     sorted_items = sorted(
         char_freq.items(),
-        key=lambda x: (-x[1](aiwd1), ord(x[2](aiwd0)))
+        key=lambda x: (-x[1], ord(x[0]))  
+    )
+    sorted_chars = [f"{char}:{freq}" for char, freq in sorted_items]
     
-    return sorted_items
+    return sorted_chars
 # 主程序，已完整
 if __name__ == "__main__":
     print("文本字符频率分析器")
