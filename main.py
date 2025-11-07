@@ -1,18 +1,12 @@
 # -*- coding: utf-8 -*-
 # 在此文件处编辑代码
 def analyze_text(text):
-    """
-    分析文本中字符频率并按频率降序排列
-    
-    参数:
-    text - 输入的字符串
-    
-    返回:
-    list - 按字符频率降序排列的字符列表
-    """
-    # 在此处增加代码
-    
-
+    char_count = Counter(text)
+    sorted_chars = sorted(char_count.items(), key=lambda x: (-x[1], x[0]))
+    print("")
+    for char, count in sorted_chars:
+        if char.isalpha():
+            print(f"字符 '{char}'：出现 {count} 次")
 # 主程序，已完整
 if __name__ == "__main__":
     print("文本字符频率分析器")
