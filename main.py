@@ -1,48 +1,25 @@
-# -*- coding: utf-8 -*-
-# 在此文件处编辑代码
-def analyze_text(text):
-    char_freq = {}
-    for char in text:
-        if char in char_freq:
-            char_freq[char] += 1
-        else:
-            char_freq[char] = 1
-    sorted_items = sorted(
-        char_freq.items(),
-        key=lambda x: (-x[1], ord(x[0]))  
-    )
-    sorted_chars = [f"{char}:{freq}" for char, freq in sorted_items]
-    
-    return sorted_chars
-# 主程序，已完整
+from collections import OrderedDict
+
+def analyze_text(input_str):
+    char_counts = {}
+    for char in input_str:
+        if not char.isalpha():
+            continue
+        lower_char = char.lower()
+        char_counts[lower_char] = char_counts.get(lower_char, 0) + 1
+    sorted_items = sorted(char_counts.items(), key=lambda x: (-x[1], x[0]))
+    return OrderedDict(sorted_items)
+
+
 if __name__ == "__main__":
     print("文本字符频率分析器")
-    print("====================")
-    print("请输入一段文本（输入空行结束）：")
-    
-    # 读取多行输入
-    lines = []
-    while True:
-        try:
-            line = input()
-            if line == "":
-                break
-            lines.append(line)
-        except EOFError:
-            break
-    
-    # 合并输入文本
-    text = "\n".join(lines)
-    
-    if not text.strip():
-        print("未输入有效文本！")
+    print("提示: 尝试输入中英文文章片段")
+    user_input = input("请输入一段文本：")
+
+    if not user_input:
+        print("输入的字符串为空，无法分析。")
     else:
-        # 分析文本
-        sorted_chars = analyze_text(text)
-        
-        # 打印结果
-        print("\n字符频率降序排列:")
-        print(", ".join(sorted_chars))
-        
-        # 提示用户比较不同语言
-        print("\n提示: 尝试输入中英文文章片段，比较不同语言之间字符频率的差别")
+        result = analyze_text(user_input)
+        print("字符频率降序排列：")
+        for char, count in result.items():
+            print(f"'{char}': {count}次")
